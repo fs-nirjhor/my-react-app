@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 var myName = 'FS NIRJHOR';
 var myStyle = {
        color: 'blue',
@@ -9,8 +10,9 @@ var study = {
        subject: 'Botany'
      };
 function App() {
-  const countryList = ['USA', 'UK', 'Russia', 'Japan'];
-  const capitalList = ['New-York','London','Moscow','Tokio'];
+  const countryList = ['USA', 'UK', 'Russia', 'Japan','China'];
+  const capitalList = ['New-York','London','Moscow','Tokio', 'Beijing'];
+  const countries = countryList.map(country => <li>{country}</li>);
   const productList = [
     {name:'Phone', price:'15000'},
     {name:'TV', price:'25000'},
@@ -19,7 +21,7 @@ function App() {
     {name:'Cooker', price:'2000'}
     ]
   return (
-    <div className="App" style={{textAlign: 'center'}}>
+    <div className="App" style={{textAlign: 'center', userSelect:'none'}}>
       <code style={{backgroundColor:'red', color:'yellow'}}>Practicing React {700+86}!</code>
       <h2 style={myStyle}>Hello REACT</h2>
       <h3>Its {myName}</h3>
@@ -30,11 +32,25 @@ function App() {
          <Products product={productList[0]}></Products>
          <Products product={productList[1]}></Products>
          <Products product={productList[2]}></Products>
-         <Products product={productList[3]}></Products>
+         {
+           productList.map(pd => <Products product={pd}></Products>)
+         }
+              <ul >{countries}</ul>
+              <Counter></Counter>
     </div>
   );
 }
 /* each functions are called components. props = properties */
+function Counter() {
+const [count, setCount] = useState(10);
+  return (
+    <div style={{backgroundColor:'lightblue', margin:'20px'}}>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count-1)}>Decrease</button> &nbsp;
+      <button onClick={() => setCount(count+1)}>Increase</button>
+    </div>
+    )
+}
   function Address(props) {
     const addressStyle = {
       border: '2px solid lime', 
