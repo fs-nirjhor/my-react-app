@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 var myName = 'FS NIRJHOR';
 var myStyle = {
        color: 'blue',
@@ -37,20 +37,12 @@ function App() {
          }
               <ul >{countries}</ul>
               <Counter></Counter>
+              <Users></Users>
     </div>
   );
 }
 /* each functions are called components. props = properties */
-function Counter() {
-const [count, setCount] = useState(10);
-  return (
-    <div style={{backgroundColor:'lightblue', margin:'20px'}}>
-      <h1>Count: {count}</h1>
-      <button onClick={() => setCount(count-1)}>Decrease</button> &nbsp;
-      <button onClick={() => setCount(count+1)}>Increase</button>
-    </div>
-    )
-}
+
   function Address(props) {
     const addressStyle = {
       border: '2px solid lime', 
@@ -80,4 +72,32 @@ const [count, setCount] = useState(10);
       </div>
       )
   }
+  function Counter() {
+const [count, setCount] = useState(10);
+  return (
+    <div style={{backgroundColor:'lightblue', margin:'20px'}}>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count-1)}>Decrease</button> &nbsp;
+      <button onClick={() => setCount(count+1)}>Increase</button>
+    </div>
+    )
+}
+ function Users() {
+ const [users, setUsers] = useState([]);
+ useEffect(()=>{
+   fetch(`https://jsonplaceholder.typicode.com/users`)
+   .then(res => res.json())
+   .then(data => setUsers(data))
+ },[])
+   return (
+    <div>
+      <h1>Total User: {users.length}</h1>
+<ol>
+      {
+   users.map(user => <li style={{margin:'20px',lineHeight:'2',backgroundColor:'orange'}}>Name : {user.name} <br/> Phone : {user.phone} <br/>Email : {user.email} </li>) 
+      }
+</ol>
+    </div>
+    )
+ }
 export default App;
