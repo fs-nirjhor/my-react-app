@@ -28,6 +28,7 @@ function App() {
      <h4>Study: {study.subject + ' ' + study.year}</h4>
          <Address></Address>     
          <Address capital='Dhaka' country='Bangladesh'></Address>
+         <Address capital='Honululu'></Address>
          <Address capital={countryList[0]} country={capitalList[0]}></Address>
          <Products product={productList[0]}></Products>
          <Products product={productList[1]}></Products>
@@ -41,7 +42,7 @@ function App() {
     </div>
   );
 }
-/* each functions are called components. props = properties */
+/* each functions are called components. props -> components properties */
 
   function Address(props) {
     const addressStyle = {
@@ -52,7 +53,7 @@ function App() {
     return (
       <div style={addressStyle}>
       <p><strong>Capital: </strong>{props.capital}</p>
-      <p><strong>Country: </strong>{props.country}</p>
+      <p><strong>Country: </strong>{props.country || 'Uganda'}</p>
       </div>
       );
   }
@@ -63,6 +64,7 @@ function App() {
      width: '23%',
      float: 'left'
    }
+   // distructer
    const {name,price} = props.product;
     return (
       <div style={productStyle}>
@@ -72,16 +74,23 @@ function App() {
       </div>
       )
   }
+  // useState -> state value can be changed 
   function Counter() {
-const [count, setCount] = useState(10);
+const [count, setCount] = useState(1);
   return (
     <div style={{backgroundColor:'lightblue', margin:'20px'}}>
-      <h1>Count: {count}</h1>
+      <h1>Quantity: {count}</h1>
+      <Price price={count*50}></Price>
       <button onClick={() => setCount(count-1)}>Decrease</button> &nbsp;
       <button onClick={() => setCount(count+1)}>Increase</button>
     </div>
     )
 }
+function Price(props){
+return <h2>Price: {props.price}</h2>
+}
+/* useEffect -> this function will call continuously. 
+[] parameter will stop useEffect */
  function Users() {
  const [users, setUsers] = useState([]);
  useEffect(()=>{
