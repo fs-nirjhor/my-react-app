@@ -9,6 +9,7 @@ var study = {
        year: '1st year',
        subject: 'Botany'
      };
+//Main Component 
 function App() {
   const countryList = ['USA', 'UK', 'Russia', 'Japan','China'];
   const capitalList = ['New-York','London','Moscow','Tokio', 'Beijing'];
@@ -79,15 +80,22 @@ function App() {
 const [count, setCount] = useState(1);
   return (
     <div style={{backgroundColor:'lightblue', margin:'20px'}}>
-      <h1>Quantity: {count}</h1>
-      <Price price={count*50}></Price>
+      <h3>Quantity: {count}</h3>
+      <Price price={count * 100}></Price>
       <button onClick={() => setCount(count-1)}>Decrease</button> &nbsp;
       <button onClick={() => setCount(count+1)}>Increase</button>
     </div>
     )
 }
 function Price(props){
-return <h2>Price: {props.price}</h2>
+return (
+<div>
+  <h3>Price: {props.price}</h3>
+  <h3>VAT: {props.price * 0.1}</h3>
+  <hr />
+  <h2> Total: {props.price + props.price*0.1}</h2>
+</div>
+)
 }
 /* useEffect -> this function will call continuously. 
 [] parameter will stop useEffect */
@@ -109,4 +117,5 @@ return <h2>Price: {props.price}</h2>
     </div>
     )
  }
+//Exporting Main Component -> App()
 export default App;
